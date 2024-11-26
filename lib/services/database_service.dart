@@ -1,20 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/vehicle.dart';
+import '../models/refueling.dart';
 
 class DatabaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> addVehicle(Vehicle vehicle) async {
+  // Adiciona um abastecimento
+  Future<void> addRefueling(Refueling refueling) async {
     try {
-      await _firestore.collection('vehicles').doc(vehicle.id).set(vehicle.toMap());
+      await _firestore.collection('refuelings').doc(refueling.id).set(refueling.toMap());
     } catch (e) {
-      print('Erro ao adicionar veículo: $e');
+      print('Erro ao adicionar abastecimento: $e');
     }
   }
 
-  Stream<List<Vehicle>> getVehicles() {
-    return _firestore.collection('vehicles').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) => Vehicle.fromMap(doc.data())).toList();
+  // Obtém abastecimentos por veículo
+  Stream<List<Refueling>> getRefuelings(String vehicleId) {
+    return _firestore
+        .collection('refuelings')
+        .where('vehicleId', isEqualTo: vehicleId)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => Refueling.fromMap(doc.data())).toList();
     });
   }
 }
