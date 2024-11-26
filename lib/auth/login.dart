@@ -37,7 +37,13 @@ class LoginPage extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
               },
               child: Text('Cadastre-se'),
-            )
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordPage()));
+              },
+              child: Text('Esqueceu sua senha?'),
+            ),
           ],
         ),
       ),
