@@ -44,6 +44,12 @@ class LoginPage extends StatelessWidget {
               },
               child: Text('Esqueceu sua senha?'),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+              },
+              child: Text('Criar conta'),
+            ),
           ],
         ),
       ),
