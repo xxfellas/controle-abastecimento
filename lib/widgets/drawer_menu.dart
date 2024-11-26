@@ -56,6 +56,16 @@ class DrawerMenu extends StatelessWidget {
               // Adicione a função de logout
             },
           ),
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text('Perfil'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
         ],
       ),
     );
