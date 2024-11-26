@@ -8,7 +8,7 @@ class AddRefuelingPage extends StatelessWidget {
   final TextEditingController mileageController = TextEditingController();
 
   AddRefuelingPage({required this.vehicleId});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,15 +30,27 @@ class AddRefuelingPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                Refueling refueling = Refueling(
-                  id: DateTime.now().toString(),
-                  vehicleId: vehicleId,
-                  liters: double.parse(litersController.text),
-                  currentMileage: double.parse(mileageController.text),
-                  date: DateTime.now(),
-                );
-                await DatabaseService().addRefueling(refueling);
-                Navigator.pop(context);
+                try {
+                  Refueling refueling = Refueling(
+                    id: DateTime.now().toString(),
+                    vehicleId: vehicleId,
+                    liters: double.parse(litersController.text),
+                    currentMileage: double.parse(mileageController.text),
+                    date: DateTime.now(),
+                  );
+
+                  print('Dados do abastecimento: ${refueling.toMap()}'); // Debug
+                  await DatabaseService().addRefueling(refueling);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Abastecimento adicionado com sucesso!')),
+                  );
+                  Navigator.pop(context);
+                } catch (e) {
+                  print('Erro ao adicionar abastecimento: $e'); // Debug
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Erro ao adicionar abastecimento: $e')),
+                  );
+                }
               },
               child: Text('Salvar'),
             ),

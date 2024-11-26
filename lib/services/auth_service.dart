@@ -7,8 +7,12 @@ class AuthService {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      print('Erro ao fazer login: $e');
+      throw Exception('Erro ao fazer login: ${e.toString()}');
     }
+  }
+
+  Future<User?> getCurrentUser() async {
+    return _auth.currentUser;
   }
   Future<void> register(String email, String password) async {
     try {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provaandreabastecimento/screens/vehicles/vehicle_details.dart';
 import '../../services/database_service.dart';
 import '../../models/vehicle.dart';
 
@@ -11,8 +10,16 @@ class VehicleListPage extends StatelessWidget {
       body: StreamBuilder<List<Vehicle>>(
         stream: DatabaseService().getVehicles(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator()); // Carregando dados
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Erro ao carregar veículos: ${snapshot.error}'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('Nenhum veículo cadastrado.'));
           }
 
           List<Vehicle> vehicles = snapshot.data!;
@@ -24,12 +31,7 @@ class VehicleListPage extends StatelessWidget {
                 title: Text(vehicle.name),
                 subtitle: Text('${vehicle.model} - ${vehicle.year}'),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VehicleDetailsPage(vehicle: vehicle),
-                    ),
-                  );
+                  // Redirecionar para detalhes do veículo
                 },
               );
             },

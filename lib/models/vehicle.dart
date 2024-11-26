@@ -5,7 +5,23 @@ class Vehicle {
   int year;
   String plate;
 
-  Vehicle({required this.id, required this.name, required this.model, required this.year, required this.plate});
+  Vehicle({
+    required this.id,
+    required this.name,
+    required this.model,
+    required this.year,
+    required this.plate,
+  });
+
+  factory Vehicle.fromMap(Map<String, dynamic> map) {
+    return Vehicle(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      model: map['model'] ?? '',
+      year: map['year'] ?? 0,
+      plate: map['plate'] ?? '',
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -15,15 +31,5 @@ class Vehicle {
       'year': year,
       'plate': plate,
     };
-  }
-
-  static Vehicle fromMap(Map<String, dynamic> map) {
-    return Vehicle(
-      id: map['id'],
-      name: map['name'],
-      model: map['model'],
-      year: map['year'],
-      plate: map['plate'],
-    );
   }
 }

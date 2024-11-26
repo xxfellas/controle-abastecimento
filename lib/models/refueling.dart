@@ -1,6 +1,6 @@
 class Refueling {
   String id;
-  String vehicleId;
+  String vehicleId; // ID do veículo associado
   double liters;
   double currentMileage;
   DateTime date;

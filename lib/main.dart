@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Controle de Abastecimento',
       theme: ThemeData(primarySwatch: Colors.blue),
+      home: LoginPage(),
+      debugShowCheckedModeBanner: false, 
       initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
