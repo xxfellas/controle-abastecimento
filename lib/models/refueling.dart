@@ -1,6 +1,6 @@
 class Refueling {
   String id;
-  String vehicleId; // ID do veículo associado
+  String vehicleId;
   double liters;
   double currentMileage;
   DateTime date;
@@ -25,10 +25,10 @@ class Refueling {
 
   static Refueling fromMap(Map<String, dynamic> map) {
     return Refueling(
-      id: map['id'],
-      vehicleId: map['vehicleId'],
-      liters: map['liters'],
-      currentMileage: map['currentMileage'],
+      id: map['id'] ?? '',
+      vehicleId: map['vehicleId'] ?? '',
+      liters: map['liters']?.toDouble() ?? 0.0,
+      currentMileage: map['currentMileage']?.toDouble() ?? 0.0,
       date: DateTime.parse(map['date']),
     );
   }

@@ -44,7 +44,10 @@ class DatabaseService {
         .where('vehicleId', isEqualTo: vehicleId)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((doc) => Refueling.fromMap(doc.data())).toList();
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return Refueling.fromMap({...data, 'id': doc.id});
+      }).toList();
     });
   }
 }
