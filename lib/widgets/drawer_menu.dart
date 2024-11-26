@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provaandreabastecimento/screens/profile.dart';
+import '../services/auth_service.dart';
 
 class DrawerMenu extends StatelessWidget {
   @override
@@ -64,6 +66,14 @@ class DrawerMenu extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => ProfilePage()),
               );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text('Logout'),
+            onTap: () async {
+              await AuthService().logout();
+              Navigator.pushReplacementNamed(context, '/login');
             },
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provaandreabastecimento/screens/vehicles/vehicle_details.dart';
 import '../../services/database_service.dart';
 import '../../models/vehicle.dart';
 

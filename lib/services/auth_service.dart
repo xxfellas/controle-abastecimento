@@ -18,4 +18,12 @@ class AuthService {
       print('Erro ao cadastrar: $e');
     }
   }
+  Future<void> logout() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print('Erro ao fazer logout: $e');
+    }
+  }
+
 }
