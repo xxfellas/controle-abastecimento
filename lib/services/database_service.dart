@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provaandreabastecimento/models/vehicle.dart';
 import '../models/refueling.dart';
 
 class DatabaseService {
@@ -12,6 +13,14 @@ class DatabaseService {
       print('Erro ao adicionar abastecimento: $e');
     }
   }
+  Future<void> updateVehicle(Vehicle vehicle) async {
+    try {
+      await _firestore.collection('vehicles').doc(vehicle.id).update(vehicle.toMap());
+    } catch (e) {
+      print('Erro ao atualizar veículo: $e');
+    }
+  }
+
 
   // Obtém abastecimentos por veículo
   Stream<List<Refueling>> getRefuelings(String vehicleId) {
